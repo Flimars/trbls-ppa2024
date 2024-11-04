@@ -1,4 +1,4 @@
-Aluno aluno = new Aluno();
+/*Aluno aluno = new Aluno();
 AlunoDAO dao = new AlunoDAO();
 dao.save(aluno);
 
@@ -22,4 +22,4 @@ Object
 // objeto de acesso a dados
 // Table Data Gateway (descontinuado)
 
-// Padrão Moderno: Repositório (repository)
+// Padrão Moderno: Repositório (repository)*/

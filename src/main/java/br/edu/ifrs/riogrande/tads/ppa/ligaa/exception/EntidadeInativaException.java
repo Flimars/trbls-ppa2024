@@ -1,4 +1,4 @@
-package br.edu.ifrs.riogrande.tads.ppa.ligaa.repository;
+package br.edu.ifrs.riogrande.tads.ppa.ligaa.exception;
 
 public class EntidadeInativaException extends RuntimeException {
 

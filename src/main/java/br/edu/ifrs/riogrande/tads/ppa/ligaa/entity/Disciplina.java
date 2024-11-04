@@ -1,3 +1,4 @@
+
 package br.edu.ifrs.riogrande.tads.ppa.ligaa.entity;
 
 import java.time.LocalDateTime;
@@ -6,58 +7,84 @@ import java.time.LocalDateTime;
 //import java.util.Optional;
 import java.util.UUID;
 
-public class Professor {
-    // -- campos de controle
+public class Disciplina {
     private UUID id;
+    private String nome;
+    private int cargahoraria;
+    private String prerequisitos;
+    private int aulasSemana;
     private LocalDateTime dataHoraCriacao;
     private LocalDateTime dataHoraAlteracao;
-    private boolean desativado; // false
+    private boolean desativado;
 
-    private String nome;
-    private String formacao;
-
-    
-    public UUID getId() {
+    public UUID getId(){
         return id;
     }
+
     public void setId(UUID id) {
         this.id = id;
     }
-    public LocalDateTime getDataHoraCriacao() {
-        return dataHoraCriacao;
-    }
-    public void setDataHoraCriacao(LocalDateTime dataHoraCriacao) {
-        this.dataHoraCriacao = dataHoraCriacao;
-    }
-    public LocalDateTime getDataHoraAlteracao() {
-        return dataHoraAlteracao;
-    }
-    public void setDataHoraAlteracao(LocalDateTime dataHoraAlteracao) {
-        this.dataHoraAlteracao = dataHoraAlteracao;
-    }
-    public boolean isDesativado() {
-        return this.desativado;
-    }
-    public void setDesativado(boolean desativado) {
-        this.desativado = desativado;
-    }
+
     public String getNome() {
         return nome;
     }
+
+    public LocalDateTime getDataHoraCriacao() {
+        return dataHoraCriacao;
+    }
+
+    public void setDataHoraCriacao(LocalDateTime dataHoraCriacao) {
+        this.dataHoraCriacao = dataHoraCriacao;
+    }
+
+    public LocalDateTime getDataHoraAlteracao() {
+        return dataHoraAlteracao;
+    }
+
+    public void setDataHoraAlteracao(LocalDateTime dataHoraAlteracao) {
+        this.dataHoraAlteracao = dataHoraAlteracao;
+    }
+
+    public boolean isDesativado() {
+        return desativado;
+    }
+
+    public void setDesativado(boolean desativado) {
+        this.desativado = desativado;
+    }
+
     public void setNome(String nome) {
         this.nome = nome;
     }
-    public String getFormacao() {
-        return formacao;
+
+    public int getCargahoraria() {
+        return cargahoraria;
     }
-    public void setFormacao(String formacao) {
-        this.formacao = formacao;
+
+    public void setCargahoraria(int cargahoraria) {
+        this.cargahoraria = cargahoraria;
     }
+
+    public String getPrerequisitos() {
+        return prerequisitos;
+    }
+
+    public void setPrerequisitos(String prerequisitos) {
+        this.prerequisitos = prerequisitos;
+    }
+
+    public int getAulasSemana() {
+        return aulasSemana;
+    }
+
+    public void setAulasSemana(int aulasSemana) {
+        this.aulasSemana = aulasSemana;
+    }
+
     @Override
     public String toString() {
-        return "Professor [id=" + id + ", dataHoraCriacao=" + dataHoraCriacao + ", dataHoraAlteracao="
-                + dataHoraAlteracao + ", desativado=" + desativado + ", nome=" + nome + ", formacao=" + formacao + "]";
+        return "Disciplina [id=" + id + ", nome=" + nome + ", cargahoraria=" + cargahoraria + ", prerequisitos="
+                + prerequisitos + ", aulasSemana=" + aulasSemana + ", toString()=" + super.toString() + "]";
     }
-   
-    
+
 }

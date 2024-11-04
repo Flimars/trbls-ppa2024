@@ -1,8 +1,8 @@
 package br.edu.ifrs.riogrande.tads.ppa.ligaa.service;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
+//import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
+//import com.fasterxml.jackson.annotation.JsonValue;
 
 // Data Transfer Object
 // JavaBean

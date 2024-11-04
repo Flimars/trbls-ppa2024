@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import br.edu.ifrs.riogrande.tads.ppa.ligaa.entity.Aluno;
+import br.edu.ifrs.riogrande.tads.ppa.ligaa.dto.AlunoDTO;
+//import br.edu.ifrs.riogrande.tads.ppa.ligaa.entity.Aluno;
 import br.edu.ifrs.riogrande.tads.ppa.ligaa.service.AlunoService;
 import br.edu.ifrs.riogrande.tads.ppa.ligaa.service.NovoAluno;
-import org.springframework.web.bind.annotation.RequestParam;
+//import org.springframework.web.bind.annotation.RequestParam;
 
 
 // Rotear tudo "que tem a ver" com Aluno
@@ -25,32 +26,28 @@ public class AlunoController {
 
     private final AlunoService alunoService;
 
-    // o AlunoService será "injetado" pelo Spring (framework)
     public AlunoController(AlunoService alunoService) {
         this.alunoService = alunoService;
     }
-   
-    // rotear
-    @PostMapping(path = "/api/v1/alunos", 
-                 consumes = MediaType.APPLICATION_JSON_VALUE)
+
+    @PostMapping(path = "/api/v1/alunos", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(code = HttpStatus.CREATED)
     public void novoAluno(@RequestBody NovoAluno aluno) {
-
-        System.out.println(aluno);
-        alunoService.cadastrarAluno(aluno); // não deve ser IDEMPOTENTE
+        alunoService.cadastrarAluno(aluno);
     }
-    
-    @GetMapping(path = "/api/v1/alunos/{cpf}") // identificador
-    public ResponseEntity<Aluno> buscaCpf(@PathVariable("cpf") String cpf) {
 
-        Aluno aluno = alunoService.buscarAluno(cpf);
-
-        return ResponseEntity.ok(aluno); // 200
+    @GetMapping(path = "/api/v1/alunos/{cpf}")
+    public ResponseEntity<AlunoDTO> buscaCpf(@PathVariable("cpf") String cpf) {
+        AlunoDTO aluno = alunoService.buscarAluno(cpf);
+        if (aluno == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+        return ResponseEntity.ok(aluno);
     }
 
     @GetMapping(path = "/api/v1/alunos")
-    public ResponseEntity<List<Aluno>> buscaTodos() {
-        return ResponseEntity.ok(alunoService.findAll()); // outras opções: 404 ou 204
+    public ResponseEntity<List<AlunoDTO>> buscaTodos() {
+        return ResponseEntity.ok(alunoService.findAll());
     }
 
     // public void novoAlunoV2(NovoAlunoV2 aluno)

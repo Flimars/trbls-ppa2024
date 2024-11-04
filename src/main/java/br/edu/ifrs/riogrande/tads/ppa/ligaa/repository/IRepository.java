@@ -1,6 +1,7 @@
 package br.edu.ifrs.riogrande.tads.ppa.ligaa.repository;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface IRepository<ENTIDADE> { // generics
     
@@ -13,7 +14,12 @@ public interface IRepository<ENTIDADE> { // generics
      * @return true se foi excluída e false caso não.
      */
     public boolean delete(ENTIDADE e);
+    
+    //Optional<T> findById(UUID id);
 
     public List<ENTIDADE> findAll();
-
+    
+    ENTIDADE findById(UUID id);
 }
+
+

@@ -6,10 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+//import java.util.Optional;
 
 import org.springframework.stereotype.Repository;
 
 import br.edu.ifrs.riogrande.tads.ppa.ligaa.entity.Aluno;
+import br.edu.ifrs.riogrande.tads.ppa.ligaa.exception.EntidadeInativaException;
 
 @Repository // infraestrutura
 public class AlunoRepository implements IRepository<Aluno> {
@@ -47,13 +49,41 @@ public class AlunoRepository implements IRepository<Aluno> {
 
     @Override
     public boolean delete(Aluno e) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+        if (e == null || e.getId() == null || !mapa.containsKey(e.getId())) {
+            return false;
+        }
+
+        Aluno aluno = mapa.get(e.getId());
+        if (aluno.isDesativado()) {
+            throw new EntidadeInativaException();
+        }
+
+        aluno.setDesativado(true);
+        aluno.setDataHoraAlteracao(LocalDateTime.now());
+        mapa.put(aluno.getId(), aluno);
+        return true;
     }
 
     @Override
     public List<Aluno> findAll() {
-        return new ArrayList<Aluno>(mapa.values());
+        List<Aluno> alunosAtivos = new ArrayList<>();
+        for (Aluno aluno : mapa.values()) {
+            if (!aluno.isDesativado()) {
+                alunosAtivos.add(aluno);
+            }
+        }
+        return alunosAtivos;
+        
+    }
+    
+    @Override
+    public Aluno findById(UUID id) {
+        Aluno aluno = mapa.get(id);
+        // Retorna o aluno apenas se ele estiver ativo
+        if (aluno != null && !aluno.isDesativado()) {
+            return aluno;
+        }
+        return null; // Retorna null se o aluno está desativado ou não existe
     }
 
 }

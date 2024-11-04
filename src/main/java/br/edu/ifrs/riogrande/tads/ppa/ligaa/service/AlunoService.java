@@ -1,17 +1,19 @@
 package br.edu.ifrs.riogrande.tads.ppa.ligaa.service;
 // new AlunoService()
 
-import java.time.LocalDateTime;
+//import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+//import java.util.Optional;
+//import java.util.UUID;
+import java.util.stream.Collectors;
 
-import org.springframework.beans.BeanUtils;
+//import org.springframework.beans.BeanUtils;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 
 import br.edu.ifrs.riogrande.tads.ppa.ligaa.entity.Aluno;
 import br.edu.ifrs.riogrande.tads.ppa.ligaa.repository.AlunoRepository;
+import br.edu.ifrs.riogrande.tads.ppa.ligaa.dto.AlunoDTO;
 
 @Service // qualificando o objeto
 public class AlunoService {
@@ -40,12 +42,33 @@ public class AlunoService {
         alunoRepository.save(aluno);        
     }
 
-    public List<Aluno> findAll() {
-        return alunoRepository.findAll();
+    public List<AlunoDTO> findAll() {
+        return alunoRepository.findAll().stream()
+                .map(aluno -> {
+                    AlunoDTO dto = new AlunoDTO();
+                    dto.setCpf(aluno.getCpf());
+                    dto.setNome(aluno.getNome());
+                    dto.setEnderecoEletronico(aluno.getEnderecoEletronico());
+                    return dto;
+                })
+                .collect(Collectors.toList());
     }
 
-    public Aluno buscarAluno(@NonNull String cpf) {
-        return new Aluno();
+    public AlunoDTO buscarAluno(@NonNull String cpf) {
+         Aluno aluno = alunoRepository.findAll().stream()
+                .filter(a -> a.getCpf().equals(cpf) && !a.isDesativado())
+                .findFirst()
+                .orElse(null);
+        if (aluno == null) {
+            return null;
+        }
+        AlunoDTO dto = new AlunoDTO();
+        dto.setCpf(aluno.getCpf());
+        dto.setNome(aluno.getNome());
+        dto.setEnderecoEletronico(aluno.getEnderecoEletronico());
+        return dto;
     }
- 
+
 }
+ 
+
