@@ -3,12 +3,13 @@ package br.edu.ifrs.riogrande.tads.ppa.ligaa.controller;
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+//import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,6 +23,7 @@ import br.edu.ifrs.riogrande.tads.ppa.ligaa.service.NovoAluno;
 // Rotear tudo "que tem a ver" com Aluno
 
 @RestController
+@RequestMapping("/api")
 public class AlunoController {
 
     private final AlunoService alunoService;
@@ -30,13 +32,13 @@ public class AlunoController {
         this.alunoService = alunoService;
     }
 
-    @PostMapping(path = "/api/v1/alunos", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping("/aluno")
     @ResponseStatus(code = HttpStatus.CREATED)
     public void novoAluno(@RequestBody NovoAluno aluno) {
         alunoService.cadastrarAluno(aluno);
     }
 
-    @GetMapping(path = "/api/v1/alunos/{cpf}")
+    @GetMapping("/alunos/{cpf}")
     public ResponseEntity<AlunoDTO> buscaCpf(@PathVariable("cpf") String cpf) {
         AlunoDTO aluno = alunoService.buscarAluno(cpf);
         if (aluno == null) {
@@ -45,7 +47,7 @@ public class AlunoController {
         return ResponseEntity.ok(aluno);
     }
 
-    @GetMapping(path = "/api/v1/alunos")
+    @GetMapping("/alunos")
     public ResponseEntity<List<AlunoDTO>> buscaTodos() {
         return ResponseEntity.ok(alunoService.findAll());
     }

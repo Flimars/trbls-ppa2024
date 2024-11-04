@@ -12,6 +12,7 @@ public class Aluno {
     private LocalDateTime dataHoraCriacao;
     private LocalDateTime dataHoraAlteracao;
     private boolean desativado; // false
+    private boolean ativo;
 
     // --
     private String nome;
@@ -58,6 +59,14 @@ public class Aluno {
     public void setDesativado(boolean desativado) {
         this.desativado = desativado;
     }
+
+    public boolean isAtivo() {
+        return ativo;
+    }
+
+    /*public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }*/
 
     public String getNome() {
         return nome;

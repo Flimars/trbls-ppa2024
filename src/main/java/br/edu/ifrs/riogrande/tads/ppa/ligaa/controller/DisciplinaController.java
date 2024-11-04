@@ -10,19 +10,19 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/disciplinas")
+@RequestMapping("/api")
 public class DisciplinaController {
 
     @Autowired
     private DisciplinaService disciplinaService;
 
-    @PostMapping
+    @PostMapping ("?disciplina")
     public ResponseEntity<DisciplinaDTO> createDisciplina(@RequestBody DisciplinaDTO disciplinaDTO) {
         DisciplinaDTO createdDisciplina = disciplinaService.createDisciplina(disciplinaDTO);
         return ResponseEntity.ok(createdDisciplina);
     }
 
-    @GetMapping
+    @GetMapping ("/disciplinas")
     public ResponseEntity<List<DisciplinaDTO>> getAllDisciplinas() {
         List<DisciplinaDTO> disciplinas = disciplinaService.getAllDisciplinas();
         return ResponseEntity.ok(disciplinas);

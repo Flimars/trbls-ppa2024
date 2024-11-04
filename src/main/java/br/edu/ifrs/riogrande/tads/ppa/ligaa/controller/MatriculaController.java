@@ -11,19 +11,19 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/matriculas")
+@RequestMapping("/api")
 public class MatriculaController {
 
     @Autowired
     private MatriculaService matriculaService;
 
-    @PostMapping
+    @PostMapping ("/matricula")
     public ResponseEntity<MatriculaDTO> createMatricula(@RequestBody MatriculaDTO matriculaDTO) {
         MatriculaDTO createdMatricula = matriculaService.createMatricula(matriculaDTO);
         return ResponseEntity.ok(createdMatricula);
     }
 
-    @GetMapping
+    @GetMapping ("/matriculas")
     public ResponseEntity<List<MatriculaDTO>> getAllMatriculas() {
         List<MatriculaDTO> matriculas = matriculaService.getAllMatriculas();
         return ResponseEntity.ok(matriculas);

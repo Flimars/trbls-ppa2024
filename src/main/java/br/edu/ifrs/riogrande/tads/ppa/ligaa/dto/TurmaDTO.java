@@ -15,6 +15,7 @@ public class TurmaDTO {
     private LocalDateTime dataHoraCriacao;
     private LocalDateTime dataHoraAlteracao;
     private boolean desativado;
+    private String nome;
 
     // Getters and Setters
 
@@ -96,5 +97,13 @@ public class TurmaDTO {
 
     public void setDesativado(boolean desativado) {
         this.desativado = desativado;
+    }
+
+    public String getNome() {
+         return this.nome; 
+    }
+    
+    public void setNome(String nome) {
+         this.nome = nome;
     }
 }

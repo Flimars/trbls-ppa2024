@@ -8,24 +8,27 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
+//import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/turmas")
+@RequestMapping("/api")
 public class TurmaController {
 
     @Autowired
     private TurmaService turmaService;
 
-    @PostMapping
+
+    @PostMapping ("/turma")
     public ResponseEntity<TurmaDTO> createTurma(@RequestBody TurmaDTO turmaDTO) {
         TurmaDTO createdTurma = turmaService.createTurma(turmaDTO);
         return ResponseEntity.ok(createdTurma);
     }
 
-    @GetMapping
+    @GetMapping ("/turmas")
     public ResponseEntity<List<TurmaDTO>> getAllTurmas() {
         List<TurmaDTO> turmas = turmaService.getAllTurmas();
         return ResponseEntity.ok(turmas);
+        
     }
 
     @GetMapping("/{id}")

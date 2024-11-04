@@ -24,6 +24,8 @@ public class Turma {
     private LocalDateTime dataHoraCriacao;
     private LocalDateTime dataHoraAlteracao;
     private boolean desativado;
+    private boolean ativa;
+    private String nome;
 
 
     public Turma() {
@@ -41,6 +43,8 @@ public class Turma {
         }
         return false;
      }
+
+    
 
     public UUID getId() {
         return id;
@@ -106,6 +110,14 @@ public class Turma {
         this.desativado = desativado;
     }
 
+    public boolean isAtiva() {
+        return ativa;
+    }
+
+    public void setAtiva(boolean ativa) {
+        this.ativa = ativa;
+    }
+
     public int getVagas() {
         return vagas;
     }
@@ -122,10 +134,20 @@ public class Turma {
         this.alunos = alunos;
     }
 
+    
+
     @Override
     public String toString() {
         return "Turma [id=" + id + ", disciplina=" + disciplina + ", professor=" + professor + ", semestre=" + semestre
                 + ", sala=" + sala + ", vaga=" + vagas + ", alunos=" + alunos + ", toString()=" + super.toString() + "]";
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
      

@@ -3,6 +3,7 @@ package br.edu.ifrs.riogrande.tads.ppa.ligaa.controller;
 import br.edu.ifrs.riogrande.tads.ppa.ligaa.dto.ProfessorDTO;
 import br.edu.ifrs.riogrande.tads.ppa.ligaa.service.ProfessorService;
 import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,19 +11,19 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/professores")
+@RequestMapping("/api")
 public class ProfessorController {
 
     @Autowired
     private ProfessorService professorService;
 
-    @PostMapping
+    @PostMapping ("/professor")
     public ResponseEntity<ProfessorDTO> createProfessor(@RequestBody ProfessorDTO professorDTO) {
         ProfessorDTO createdProfessor = professorService.createProfessor(professorDTO);
         return ResponseEntity.ok(createdProfessor);
     }
 
-    @GetMapping
+    @GetMapping("/professores")
     public ResponseEntity<List<ProfessorDTO>> getAllProfessores() {
         List<ProfessorDTO> professores = professorService.getAllProfessores();
         return ResponseEntity.ok(professores);

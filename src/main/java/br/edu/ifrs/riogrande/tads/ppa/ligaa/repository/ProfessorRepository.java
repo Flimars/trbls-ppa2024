@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
-import java.util.Optional;
+//import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Repository
@@ -48,9 +48,8 @@ public class ProfessorRepository implements IRepository<Professor> {
     }
 
     public boolean deleteById(UUID id) {
-        Optional<Professor> optionalProfessor = findById(id);
-        if (optionalProfessor.isPresent()) {
-            Professor professor = optionalProfessor.get();
+        Professor professor = findById(id);
+        if (professor != null) {
             professor.setDesativado(true);
             professor.setDataHoraAlteracao(LocalDateTime.now());
             mapa.put(id, professor);
@@ -67,8 +66,11 @@ public class ProfessorRepository implements IRepository<Professor> {
     }
 
     @Override
-    public Optional<Professor> findById(UUID id) {
-        return Optional.ofNullable(mapa.get(id))
-                .filter(professor -> !professor.isDesativado());
+    public Professor findById(UUID id) throws EntidadeInativaException {
+        Professor professor = mapa.get(id);
+        if (professor == null || professor.isDesativado()) {
+            throw new EntidadeInativaException();
+        }
+        return professor;
     }
 }
